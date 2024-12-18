@@ -1,0 +1,54 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "img2img.py",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "scripts/img2img.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--prompt",
+                "A fantasy landscape, trending on artstation",
+                "--init-img",
+                "/workspace/fork_sd/test/blur__0326.png",
+                "--strength",
+                "0.8",
+                "--ckpt",
+                "${workspaceFolder}/checkpoints/v2-1_512-ema-pruned.ckpt"
+            ],
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            }
+            // python scripts/img2img.py --prompt "A fantasy landscape, trending on artstation" --init-img <path-to-img.jpg> --strength 0.8 --ckpt <path/to/model.ckpt>
+        },
+        {
+            "name": "restoration_diffusion.py",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "scripts/restoration_diffusion.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--prompt",
+                "a professional photograph of an astronaut riding a horse",
+                "--ckpt",
+                "${workspaceFolder}/checkpoints/v2-1_512-ema-pruned.ckpt",
+                "--config",
+                "configs/stable-diffusion/v2-inference.yaml",
+                "--device", "cuda",
+                "--n_samples", "1",
+                "--n_iter", "1"
+            ],
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}",
+                "ATTN_PRECISION": "fp16",
+            },
+            "justMyCode": false
+            // 允许debug第三方库
+            //python scripts/txt2img.py --prompt "a professional photograph of an astronaut riding a horse" --ckpt <path/to/model.ckpt/> --config <path/to/config.yaml/>  
+        }
+    ]
+}

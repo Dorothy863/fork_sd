@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import kornia
+import os
 from torch.utils.checkpoint import checkpoint
 
 from transformers import T5Tokenizer, T5EncoderModel, CLIPTokenizer, CLIPTextModel
@@ -187,6 +188,8 @@ class FrozenOpenCLIPEmbedder(AbstractEncoder):
                  freeze=True, layer="last"):
         super().__init__()
         assert layer in self.LAYERS
+        # 指向预训练模型的路径，使用相对路径，指向当前文件夹的上上上一级
+        # version = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../checkpoints/open_clip_pytorch_model.bin")
         model, _, _ = open_clip.create_model_and_transforms(arch, device=torch.device('cpu'), pretrained=version)
         del model.visual
         self.model = model
